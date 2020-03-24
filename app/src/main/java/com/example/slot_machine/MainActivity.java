@@ -20,11 +20,15 @@ public class MainActivity extends AppCompatActivity {
     private Drawable grapeImage;
     private Drawable strawberryImage;
     private LinearLayout linearLayout;
-    private ImageView[] imageViews;
+    private ImageView imageView2;
+    private ImageView imageView3;
+    private ImageView imageView4;
     private int slotpiclocation;
     private Random rand;
     public boolean on;
     public Handler handler;
+    public updateCount update;
+    private int cherryLocation;
 
 
     @Override
@@ -33,20 +37,23 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         pointCounter = findViewById(R.id.pointCounter);
-        cherryImage =  getDrawable(R.drawable.cherry);
+        cherryImage = getDrawable(R.drawable.cherry);
         grapeImage = getDrawable(R.drawable.grape);
         strawberryImage = getDrawable(R.drawable.strawberry);
         linearLayout = findViewById(R.id.linearLayout);
-        imageViews = new ImageView[3];
 
+        imageView2 =  findViewById(R.id.imageView2);
+        imageView3 =  findViewById(R.id.imageView3);
+        imageView4 =  findViewById(R.id.imageView4);
+
+
+        update = new updateCount();
 
         on = false;
 
         rand = new Random();
-        slotpiclocation = rand.nextInt(4);
-
-
-
+        cherryLocation = rand.nextInt(3);
+        handler = new Handler();
 
     }
     public void startPressed(View v){
@@ -63,5 +70,22 @@ public class MainActivity extends AppCompatActivity {
             handler.postDelayed(update, 1000);
         }
 
+    }
+    public class updateCount implements Runnable{
+
+        public void run(){
+
+            if (imageView2.getDrawable() == strawberryImage) {
+                imageView2.setImageDrawable(grapeImage);
+            } else if (imageView3.getDrawable() == grapeImage) {
+                imageView3.setImageDrawable(cherryImage);
+            } else if (imageView4.getDrawable() == cherryImage) {
+                imageView4.setImageDrawable(strawberryImage);
+            }
+
+            handler.postDelayed(update, 1000);
+
+
+        }
     }
 }

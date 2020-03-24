@@ -28,8 +28,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/slothole"
-            android:padding="10dp"
             app:srcCompat="@drawable/grape" />
 
         <ImageView
@@ -37,18 +35,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/slothole"
-            android:padding="10dp"
-            app:srcCompat="@drawable/strawberry" />
+            app:srcCompat="@drawable/cherry" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/imageView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@drawable/slothole"
-            android:padding="10dp"
-            app:srcCompat="@drawable/cherry" />
+            app:srcCompat="@drawable/strawberry" />
     </LinearLayout>
 
     <TextView
