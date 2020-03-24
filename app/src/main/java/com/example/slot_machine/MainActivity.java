@@ -77,9 +77,23 @@ public class MainActivity extends AppCompatActivity {
 
             if (imageView2.getDrawable() == strawberryImage) {
                 imageView2.setImageDrawable(grapeImage);
-            } else if (imageView3.getDrawable() == grapeImage) {
+                } else if (imageView2.getDrawable() == grapeImage) {
+                imageView2.setImageDrawable(cherryImage);
+                } else {
+                imageView2.setImageDrawable(strawberryImage);
+                }
+            if (imageView3.getDrawable() == strawberryImage) {
+                imageView3.setImageDrawable(grapeImage);
+                } else if (imageView3.getDrawable() == grapeImage) {
                 imageView3.setImageDrawable(cherryImage);
-            } else if (imageView4.getDrawable() == cherryImage) {
+                } else {
+                imageView3.setImageDrawable(strawberryImage);
+                }
+            if (imageView4.getDrawable() == strawberryImage) {
+                imageView4.setImageDrawable(grapeImage);
+                } else if (imageView4.getDrawable() == grapeImage) {
+                imageView4.setImageDrawable(cherryImage);
+                } else {
                 imageView4.setImageDrawable(strawberryImage);
             }
 
