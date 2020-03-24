@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.content.Intent;
 
@@ -23,11 +24,13 @@ public class MainActivity extends AppCompatActivity {
     private ImageView imageView2;
     private ImageView imageView3;
     private ImageView imageView4;
+    private SeekBar speedBar;
     private Random rand;
     public boolean on;
     public Handler handler;
     public updateCount update;
     private int count;
+
 
 
 
@@ -46,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
         imageView3 =  findViewById(R.id.imageView3);
         imageView4 =  findViewById(R.id.imageView4);
 
+        speedBar = findViewById(R.id.speedBar);
+
         //creating an new update method
         update = new updateCount();
         on = false;
@@ -55,7 +60,25 @@ public class MainActivity extends AppCompatActivity {
         //creating a new handler
         handler = new Handler();
 
+        speedBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                seekBar.setProgress(progress);
+                handler.postDelayed(update, progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
     }
+
     public void startPressed(View v){
         //if the button is pressed already clicking it again will stop it
         if (on) {
@@ -84,11 +107,12 @@ public class MainActivity extends AppCompatActivity {
             //else if its on keep and has not been clicked a second time counter keeps going
             on = true;
             //creates handler starts counter
-            handler.postDelayed(update, 100);
+            handler.postDelayed(update, 1000);
 
         }
 
     }
+
     public class updateCount implements Runnable{
 
         public void run(){
@@ -115,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
                     imageView4.setImageDrawable(strawberryImage);
                 }
 
-            handler.postDelayed(update, 100);
+            handler.postDelayed(update, 1000);
 
         }
 
