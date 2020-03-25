@@ -3,9 +3,11 @@ package com.example.slot_machine;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
@@ -25,12 +27,10 @@ public class MainActivity extends AppCompatActivity {
     private ImageView imageView3;
     private ImageView imageView4;
     private SeekBar speedBar;
-    private Random rand;
     public boolean on;
     public Handler handler;
     public updateCount update;
     private int count;
-
 
 
 
@@ -49,17 +49,19 @@ public class MainActivity extends AppCompatActivity {
         imageView3 =  findViewById(R.id.imageView3);
         imageView4 =  findViewById(R.id.imageView4);
 
+
+
         speedBar = findViewById(R.id.speedBar);
 
         //creating an new update method
         update = new updateCount();
         on = false;
         count = 0;
-        //creating a new random method
-        rand = new Random();
+
         //creating a new handler
         handler = new Handler();
 
+        //adding speed to the progress bar
         speedBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -78,6 +80,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    public void invitePressed (View v){
+        //navigates to contacts (view = action_view, this content ("")
+        //uniform resource to find content by a string
+        Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("content://contacts/people/"));
+        //starts the intent
+        startActivity(i);
+    }
+
     public void rulesPressed(View v){
         //launches second screen rules_Activity screen
         //intent-activity pages talk to each other
@@ -91,6 +101,8 @@ public class MainActivity extends AppCompatActivity {
             on = false;
             //removes handler and stops counter
             handler.removeCallbacks(update);
+
+            //point counter update
             if (imageView2.getDrawable() == imageView3.getDrawable()) {
                 count += 50;
                 pointCounter.setText(count + "");
@@ -150,4 +162,5 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
 }
