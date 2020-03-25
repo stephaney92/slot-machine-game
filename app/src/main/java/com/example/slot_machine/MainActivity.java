@@ -78,6 +78,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    public void rulesPressed(View v){
+        //launches second screen rules_Activity screen
+        //intent-activity pages talk to each other
+        Intent i = new Intent(this,rules_Activity.class);
+        startActivityForResult(i,1);
+    }
 
     public void startPressed(View v){
         //if the button is pressed already clicking it again will stop it
@@ -98,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                 pointCounter.setText(count + "");
             }
             else if (imageView2.getDrawable().equals(imageView3.getDrawable()) && imageView3.getDrawable().equals(imageView4.getDrawable()) &&imageView4.getDrawable().equals(imageView2.getDrawable())){
-                count += 50;
+                count += 100;
                 pointCounter.setText(count + "");
             }
 
