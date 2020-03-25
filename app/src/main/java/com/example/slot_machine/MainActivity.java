@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     public Handler handler;
     public updateCount update;
     private int count;
+    private Button startButton;
 
 
 
@@ -49,14 +51,34 @@ public class MainActivity extends AppCompatActivity {
         imageView3 =  findViewById(R.id.imageView3);
         imageView4 =  findViewById(R.id.imageView4);
 
-
+        startButton = findViewById(R.id.startButton);
 
         speedBar = findViewById(R.id.speedBar);
 
         //creating an new update method
         update = new updateCount();
-        on = false;
-        count = 0;
+
+
+        //checks to see if save instance state is empty
+        //meaning if the app hasn't started yet then the instance is null
+        if (savedInstanceState == null){
+            count = 0;
+            on = false;
+        }
+        else{
+            //else continue with count of the points in the next orientation
+            //extracting count from from the bundle
+            count = savedInstanceState.getInt("COUNT");
+            pointCounter.setText("" + count );
+            //passes value of on to the next orientation
+            on = savedInstanceState.getBoolean("ON");
+            if (on){
+                startButton.setText("Stop");
+            }
+
+
+        }
+
 
         //creating a new handler
         handler = new Handler();
@@ -80,6 +102,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    public void onSaveInstanceState(Bundle bundle){
+        super.onSaveInstanceState(bundle);
+        //putting information into the bundle
+        bundle.putInt("COUNT", count);
+        bundle.putBoolean("ON", on);
+    }
     public void invitePressed (View v){
         //navigates to contacts (view = action_view, this content ("")
         //uniform resource to find content by a string
@@ -101,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
             on = false;
             //removes handler and stops counter
             handler.removeCallbacks(update);
-
+            startButton.setText("Start");
             //point counter update
             if (imageView2.getDrawable() == imageView3.getDrawable()) {
                 count += 50;
@@ -126,6 +154,7 @@ public class MainActivity extends AppCompatActivity {
             on = true;
             //creates handler starts counter
             handler.postDelayed(update, 1000);
+            startButton.setText("Stop");
 
         }
 
